@@ -1,3 +1,4 @@
+# server side
 import socket
 import sys
 
@@ -17,6 +18,8 @@ while True:
         print('connection from {client}' .format(client=client_address))
         while True:
             data=connection.recv(16)
+            # data = connection.recv()
+            #data = data.split()
             print('Server is now recieving {data} '.format(data=data))
             if data:
                 print('sending data back to client: {data}'.format(data=data))
