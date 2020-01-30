@@ -5,27 +5,7 @@ import random
 from random import randint
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-number_operations = 100000 # do them in a for loop after doing for one operation
-number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
-thread_numbers = 3
-node_id = randint(1,number_keys) % thread_numbers
-value = randint(1,999999)
-key = randint(1,number_keys)
-if (random.random() <0.4): # the operation type
-    request = 'put'
-    message =  request+' '+str(key)+' '+str(value)
-else:
-    request = 'get'
-    message =  request+' '+str(key)
 
-if node_id == 0:
-    local_hashing(message=message)
-else:
-    #connect the server to call the corresponding server ..
-    message = message + ' ' + str(node_id)
-    connect_server(message = message)
-# to seperate the elements of the received message do the following
-#message.split()
 def connect_server( message):
     #connect the socket to the port where the server is listening to
     server_address = ('localhost', 10000)
@@ -55,8 +35,39 @@ def connect_server( message):
     return; # end of function connect_server
 
 
-
 def local_hashing(message):
     #message format -->  message =  request+' '+str(key)+' '+str(value)
-    print('yeahhh inside hashing')
-    return True
+    hostname = socket.gethostname();
+    IPAddr = socket.gethostbyname(hostname);
+    print('yeahhh a request from my hashing table. IP: '+IPAddr)
+
+    return True;
+
+
+#the program flow ..
+# update this part by reading this information from the property file
+number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
+thread_numbers = 3
+node_id = randint(1,number_keys) % thread_numbers
+value = randint(1,999999)
+key = randint(1,number_keys)
+# create the hash table of the current node, based on the starting key it reads from the property file ..
+
+number_operations = 100000 # do them in a for loop after doing for one operation
+if (random.random() <0.4): # the operation type
+    request = 'put'
+    message =  request+' '+str(key)+' '+str(value)
+else:
+    request = 'get'
+    message =  request+' '+str(key)
+
+if node_id == 0:
+    local_hashing(message)
+else:
+    #connect the server to call the corresponding server ..
+    message = message + ' ' + str(node_id)
+    connect_server(message)
+# to seperate the elements of the received message do the following
+#message.split()
+
+
