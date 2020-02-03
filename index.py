@@ -1,17 +1,20 @@
 # server side
 import socket
 import sys
+import threading
 
 # initializing hash-table to serve the request send to this current node ..
 number_keys = 5000
 thread_numbers = 3
 hash_table = [[] for i in range(int(number_keys/thread_numbers))]
 
+locks = [threading.Lock() for _ in range(len(hash_table))]
 # serve the recieved requests in this node:
 def insert(key, value):
     global hash_table
     hash_key = hash(key)%len(hash_table)
     key_exists = False
+    locks[hash_key].acquire()
     item = hash_table[hash_key]
     for i, kv in enumerate(item):
         k, v = kv # ?
@@ -22,22 +25,27 @@ def insert(key, value):
     if key_exists:
         item[i] =((key, value)) # in this case, only update the value of the corresponding key ?
         print('this pair already exists in the hash-table')
+        locks[hash_key].release()
         return False #key already exist, in this case we should return false , or should we return item[i]?
     else:
         item.append((key, value)) #? does it change global hash table?
-        print(' after insterting the hash-table is:')
-        print(hash_table)
+        # print(' after insterting the hash-table is:')
+        # print(hash_table)
+        locks[hash_key].release()
         return True
 
 def get(key):
     global hash_table
     hash_key = hash(key)%len(hash_table)
+    locks[hash_key].acquire()
     item = hash_table[hash_key]
     for i, kv in enumerate(item):
         k, v = kv
         if key==k:
-            return v
+            return True
+            #return v
     print('this key has not yet set in my machine')
+    locks[hash_key].release()
     return False # if the key is not there ? I don't think we need it, right?
 
 
@@ -54,7 +62,7 @@ def local_hashing(message):
         insert(temp[1], temp[2]) # insert(key, value)
     elif(temp[0] == 'get'):
         search(temp[1]) # search(key)
-    return True;
+    return True
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -66,36 +74,35 @@ sock.bind(server_address)
 sock.listen(1) #put the socket in server mode
 
 while True:
+
     print('waiting for a connection')
-    connection, client_address = sock.accept() # waits for an incoming message
+    connection, client_address = sock.accept() # waits for an incoming message ..
     print(connection, client_address)
     try:
         print('connection from {client}' .format(client=client_address))
-        while True:
-            data=connection.recv(1024).decode('utf-8')
-            print('Server is now receiving {data} '.format(data=str(data)))
-            #data = data.split()
-            temp = data.split()
-            request_type = temp[0]
-            key = temp[1]
-            value = temp[2]
-            print('@@@')
-            print(temp)
-            #... split the comming message and then serve the service .... and send true or false to the application so that they can count how many percent of the messages were sreved successfully
-            if request_type == 'put':
-                res = insert(key, value)
-            elif request_type =='get':
-                res = get(key)
-            #send the data back to the application who requested this request?
-            print('sending result of the request back to the client side')
-            print('@@@')
-            connection.sendall(str(res).encode())
-            # if data:
-            #     print('sending data back to client: {data}'.format(data=data))
-            #     #data=data[len(data)::-1] # reverse the string before sending it back
-            #     connection.sendall(data)
-            # else:
-            #     print('no more data from {client} ..'.format(client = client_address))
-            #     break
+        #while True:
+        data=connection.recv(1024).decode('utf-8')
+        print('Server is now receiving {data} '.format(data=str(data)))
+        #data = data.split()
+        temp = data.split()
+        print(temp)
+        print('TEMP IS ABOVE')
+        request_type = temp[0]
+        key = temp[1]
+        value = temp[2]
+        print('@@@')
+        print(temp)
+        #... split the comming message and then serve the service .... and send true or false to the application so that they can count how many percent of the messages were sreved successfully
+        if request_type == 'put':
+            res = insert(key, value)
+        elif request_type =='get':
+            res = get(key)
+        #send the data back to the application who requested this request?
+        print('sending result of the request back to the client side')
+        print('@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+        # if res==None:
+        #     res = "None"
+        connection.sendall(str(res).encode())
+        print(res)
     finally:
         connection.close()
