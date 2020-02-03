@@ -66,8 +66,8 @@ def local_hashing(message):
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-server_address = ('localhost', 10000)
+IPAddr = socket.gethostbyname(socket.gethostname());
+server_address = (str(IPAddr), 10000)
 print('starting on {server_address} on port {port}' .format(server_address = sys.stderr,port = server_address))
 sock.bind(server_address)
 

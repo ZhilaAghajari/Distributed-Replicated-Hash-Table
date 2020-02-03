@@ -76,8 +76,8 @@ for i in range(number_operations):
     # elseif node_id ==2:
     #     server_ip=''
     #server_ip = '192.168.1.8.'
-    #server_ip = socket.gethostbyname(socket.gethostname())
-    server_ip = 'localhost'
+    server_ip = socket.gethostbyname(socket.gethostname())
+    # server_ip = 'localhost'
     print('iteration: '+str(i))
     print(server_ip)
     connect_server(message, server_ip)
