@@ -3,6 +3,7 @@ import socket
 import sys
 import random
 from random import randint
+import time
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -26,12 +27,16 @@ def connect_server( message, server_ip):
         #amount_expected = len(message) # I will get true or false and then count the number of true as successful and False as unsuccessful
         data = sock.recv(1024).decode('utf-8')
         print('Receiving the result from server ::: {data} '.format(data=data))
-        if data == 'True':
-            num_success = num_success+1
+        # if data == 'True':
+        #     num_success = num_success+1
         if data == "None":
-            print('The process was not done')
-        if data== 'False':
             num_unsuccessfull = num_unsuccessfull +1
+            #print('The process was not done')
+        else :
+            num_success = num_success +1
+            print(data)
+        # if data== 'False':
+        #     num_unsuccessfull = num_unsuccessfull +1
 
 
     finally:
@@ -41,9 +46,10 @@ def connect_server( message, server_ip):
 
 # Initialize the variables ..
 # Update this part by reading this information from the property file
-number_operations = 300 # do them in a for loop after doing for one operation
+number_operations = 100 # do them in a for loop after doing for one operation
 num_success=0
 num_unsuccessfull=0
+start_time = time.time()
 for i in range(number_operations):
     number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
     thread_numbers = 3
@@ -70,14 +76,17 @@ for i in range(number_operations):
     # elseif node_id ==2:
     #     server_ip=''
     #server_ip = '192.168.1.8.'
+    #server_ip = socket.gethostbyname(socket.gethostname())
     server_ip = 'localhost'
     print('iteration: '+str(i))
-    print(message)
+    print(server_ip)
     connect_server(message, server_ip)
 
+end_time = time.time()
+time_period = end_time -start_time
 print('percent of success:'+str(num_success/number_operations))
 print('percent of Unsuccess:'+str(num_unsuccessfull/number_operations))
-
+print('{opr} number of operations has been executed in {sec} seconds'.format(sec=time_period, opr=(number_operations)))
 
 
 

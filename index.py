@@ -26,9 +26,9 @@ def insert(key, value):
         item[i] =((key, value)) # in this case, only update the value of the corresponding key ?
         print('this pair already exists in the hash-table')
         locks[hash_key].release()
-        return False #key already exist, in this case we should return false , or should we return item[i]?
+        return True #key already exist, in this case we should return false , or should we return item[i]? zhila check
     else:
-        item.append((key, value)) #? does it change global hash table?
+        item.append((key, value))
         # print(' after insterting the hash-table is:')
         # print(hash_table)
         locks[hash_key].release()
@@ -42,11 +42,11 @@ def get(key):
     for i, kv in enumerate(item):
         k, v = kv
         if key==k:
-            return True
-            #return v
+            #return True
+            return v
     print('this key has not yet set in my machine')
     locks[hash_key].release()
-    return False # if the key is not there ? I don't think we need it, right?
+    return None # if the key is not there ? I don't think we need it, right?
 
 
 # remember to count number of success and fails ..
@@ -100,8 +100,10 @@ while True:
         #send the data back to the application who requested this request?
         print('sending result of the request back to the client side')
         print('@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-        # if res==None:
-        #     res = "None"
+        if res==None:
+            res = "None"
+        else:
+            res = "Success"
         connection.sendall(str(res).encode())
         print(res)
     finally:
