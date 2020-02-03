@@ -53,7 +53,9 @@ def get(key):
 def local_hashing(message):
     #message format -->  message =  request+' '+str(key)+' '+str(value)
     hostname = socket.gethostname();
-    IPAddr = socket.gethostbyname(hostname);
+    IPAddr = socket.gethostbyname(hostname)
+    #external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
+
     print('yeahhh a request from my hashing table. IP: '+IPAddr)
     global hash_table
     # split the component of the new message ...
@@ -66,7 +68,7 @@ def local_hashing(message):
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-IPAddr = socket.gethostbyname(socket.gethostname());
+IPAddr = socket.gethostbyname(socket.gethostname())
 server_address = (str(IPAddr), 10000)
 print('starting on {server_address} on port {port}' .format(server_address = sys.stderr,port = server_address))
 sock.bind(server_address)

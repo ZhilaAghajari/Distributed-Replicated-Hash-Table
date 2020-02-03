@@ -75,8 +75,12 @@ for i in range(number_operations):
     #     server_ip = ''
     # elseif node_id ==2:
     #     server_ip=''
-    #server_ip = '192.168.1.8.'
-    server_ip = socket.gethostbyname(socket.gethostname())
+    #server_ip = socket.gethostbyname(socket.gethostname())
+    server_ip_mac_mini = '128.180.220.113'
+    server_ip_mac = '128.180.204.171'
+    server_ips = [server_ip_mac_mini, server_ip_mac ]
+    server_ip = server_ips[randint(0,1)]
+    #server_ip = '128.180.204.171'
     # server_ip = 'localhost'
     print('iteration: '+str(i))
     print(server_ip)
