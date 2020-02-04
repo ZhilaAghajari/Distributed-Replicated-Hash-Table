@@ -10,6 +10,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 def connect_server( message, server_ip):
     global num_success
     global num_unsuccessfull
+    global nack
     #connect the socket to the port where the server is listening to
     # server_address = ('localhost', 10000)
     server_address = (server_ip, 10000)
@@ -29,6 +30,9 @@ def connect_server( message, server_ip):
         print('Receiving the result from server ::: {data} '.format(data=data))
         # if data == 'True':
         #     num_success = num_success+1
+        if data == 'Nack':
+            nack = nack + 1
+            return 'Nack'
         if data == "None":
             num_unsuccessfull = num_unsuccessfull +1
             #print('The process was not done')
@@ -49,6 +53,7 @@ def connect_server( message, server_ip):
 number_operations = 100 # do them in a for loop after doing for one operation
 num_success=0
 num_unsuccessfull=0
+nack = 0
 start_time = time.time()
 for i in range(number_operations):
     number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
@@ -84,12 +89,20 @@ for i in range(number_operations):
     # server_ip = 'localhost'
     print('iteration: '+str(i))
     print(server_ip)
-    connect_server(message, server_ip)
+    res_itr = connect_server(message, server_ip)
+    if res_itr == 'Nack':
+        t = 1 #
+        while(connect_server(message, server_ip) =='Nack'):
+            time.sleep(0.000001*t)
+            t = t*2
+
+
 
 end_time = time.time()
 time_period = end_time -start_time
 print('percent of success:'+str(num_success/number_operations))
 print('percent of Unsuccess:'+str(num_unsuccessfull/number_operations))
+print('percent of un-acknowledged requests: '+str(nack/number_operations))
 print('{opr} number of operations has been executed in {sec} seconds'.format(sec=time_period, opr=(number_operations)))
 
 

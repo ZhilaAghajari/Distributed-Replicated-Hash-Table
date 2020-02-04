@@ -14,6 +14,8 @@ def insert(key, value):
     global hash_table
     hash_key = hash(key)%len(hash_table)
     key_exists = False
+    if(locks[hash_key].locked()):
+        return 'Nack'
     locks[hash_key].acquire()
     item = hash_table[hash_key]
     for i, kv in enumerate(item):
@@ -23,10 +25,10 @@ def insert(key, value):
             #return False # key already exist, in this case we should return false , right?
             break
     if key_exists:
-        item[i] =((key, value)) # in this case, only update the value of the corresponding key ?
+        #item[i] =((key, value)) # in this case, only update the value of the corresponding key ? or don't do anything?
         print('this pair already exists in the hash-table')
         locks[hash_key].release()
-        return True #key already exist, in this case we should return false , or should we return item[i]? zhila check
+        return False #key already exist, in this case we should return false , or should we return item[i]? zhila check
     else:
         item.append((key, value))
         # print(' after insterting the hash-table is:')
@@ -37,6 +39,8 @@ def insert(key, value):
 def get(key):
     global hash_table
     hash_key = hash(key)%len(hash_table)
+    if(locks[hash_key].locked()):
+        return 'Nack'
     locks[hash_key].acquire()
     item = hash_table[hash_key]
     for i, kv in enumerate(item):
