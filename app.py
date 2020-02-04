@@ -7,25 +7,14 @@ import time
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def connect_server( message, server_ip):
+def connect_server( message, server_ip,sock):
     global num_success
     global num_unsuccessfull
     global nack
     #connect the socket to the port where the server is listening to
-    # server_address = ('localhost', 10000)
-    #server_address = (server_ip, 10000)
-    #print('client is now connecting to the port {server}' .format(server = server_address))
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_address = (server_ip, 10000)
     #sock.connect(server_address)
-    ## to be removed ##
-    server_address= (server_ip, 1000)
-    sock.connect(server_address)
     print('client is now connecting to the port {server}' .format(server = server_address))
-    # server_address = ('128.180.204.171', 1000)
-    # sock2.connect(server_address)
-    # print('client is now connecting to the port {server}' .format(server = server_address))
-    ## to be removed ##
     try:
         # random model to ask put and get request from the server.. the client can know whether the server has it locally or not ... it can tell the server client 3 has it
         # Send data
@@ -52,10 +41,12 @@ def connect_server( message, server_ip):
 
 
     finally:
-        print('closing socket in client side')
-        sock.close()
+        0
+        #print('closing socket in client side')
+        #sock.close()
     return # end of function connect_server
 
+# the main function goes here ...
 # Initialize the variables ..
 # Update this part by reading this information from the property file
 number_operations = 100 # do them in a for loop after doing for one operation
@@ -63,9 +54,18 @@ num_success=0
 num_unsuccessfull=0
 nack = 0
 start_time = time.time()
+#ips ...
+server_ip_mac_mini = '128.180.220.113'
+server_ip_mac_book = '128.180.204.171'
+# sockets ..
+sock = {}
+sock['s1'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock['s2'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock['s1'] .connect((server_ip_mac_mini,10000))
+sock['s2'] .connect((server_ip_mac_book,10000))
 for i in range(number_operations):
     number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
-    thread_numbers = 3
+    thread_numbers = 2 # change it to 3 after testing ..
     value = randint(1,999999)
     key = randint(1,number_keys)
     # create the hash table of the current node, based on the starting key it reads from the property file ..
@@ -81,28 +81,37 @@ for i in range(number_operations):
     #calculate which node should serve this request :
     node_id = key%thread_numbers
     message = message+' '+str(node_id)
-    # update ip address based on node_id calcualted above...
-    # if node_id == 0:
-    #     server_ip = 'localhost'
-    # elif node_id ==1:
-    #     server_ip = ''
-    # elseif node_id ==2:
-    #     server_ip=''
-    #server_ip = socket.gethostbyname(socket.gethostname())
-    server_ip_mac_mini = '128.180.220.113'
-    server_ip_mac = '128.180.204.171'
-    server_ips = [server_ip_mac_mini, server_ip_mac ]
-    server_ip = server_ips[randint(0,1)]
+    if node_id ==0:
+        #corresponding_sock = socket['s1']
+        server_ip = server_ip_mac_mini
+        res_itr = connect_server(message, server_ip,sock['s1'])
+        if res_itr == 'Nack':
+            t = 1 #
+            while(connect_server(message, server_ip, sock['s1']) =='Nack'):
+                time.sleep(0.000001*t)
+                t = t*2
+    elif node_id ==1:
+        #corresponding_sock = socket['s2']
+        server_ip = server_ip_mac_book
+        res_itr = connect_server(message, server_ip,sock['s2'])
+        if res_itr == 'Nack':
+            t = 1 #
+            while(connect_server(message, server_ip, sock['s2']) =='Nack'):
+                time.sleep(0.000001*t)
+                t = t*2
+
+    # server_ips = [server_ip_mac_mini, server_ip_mac ]
+    # server_ip = server_ips[randint(0,1)]
     #server_ip = '128.180.204.171'
     # server_ip = 'localhost'
     print('iteration: '+str(i))
     print(server_ip)
-    res_itr = connect_server(message, server_ip)
-    if res_itr == 'Nack':
-        t = 1 #
-        while(connect_server(message, server_ip) =='Nack'):
-            time.sleep(0.000001*t)
-            t = t*2
+    # res_itr = connect_server(message, server_ip,corresponding_sock)
+    # if res_itr == 'Nack':
+    #     t = 1 #
+    #     while(connect_server(message, server_ip, corresponding_sock) =='Nack'):
+    #         time.sleep(0.000001*t)
+    #         t = t*2
 
 
 
