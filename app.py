@@ -16,14 +16,21 @@ def connect_server( message, server_ip):
     server_address = (server_ip, 10000)
     print('client is now connecting to the port {server}' .format(server = server_address))
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect(server_address)
+    sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #sock.connect(server_address)
+    ## to be removed ##
+    if(server_ip =='128.180.220.113'):
+        sock.connect(server_address)
+    elif(server_ip =='128.180.204.171'):
+        sock2.connect(server_address)
+    ## to be removed ##
     try:
         # random model to ask put and get request from the server.. the client can know whether the server has it locally or not ... it can tell the server client 3 has it
         # Send data
         #message = 'MessageFromApplication.'+' ' +  message
         print('Sending the data from application """ {data}'.format(data=message))
         sock.sendall(message.encode())
-
+        sock2.sendall(message.encode())
         # here we receive message back from the server which tells us whether the operation was done successfully or not then we calculate the performance
         #amount_expected = len(message) # I will get true or false and then count the number of true as successful and False as unsuccessful
         data = sock.recv(1024).decode('utf-8')

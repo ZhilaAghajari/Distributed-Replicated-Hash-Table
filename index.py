@@ -54,21 +54,21 @@ def get(key):
 
 
 # remember to count number of success and fails ..
-def local_hashing(message):
-    #message format -->  message =  request+' '+str(key)+' '+str(value)
-    hostname = socket.gethostname();
-    IPAddr = socket.gethostbyname(hostname)
-    #external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
-
-    print('yeahhh a request from my hashing table. IP: '+IPAddr)
-    global hash_table
-    # split the component of the new message ...
-    temp = message.split(message)
-    if(temp[0] == 'put'):
-        insert(temp[1], temp[2]) # insert(key, value)
-    elif(temp[0] == 'get'):
-        search(temp[1]) # search(key)
-    return True
+# def local_hashing(message):
+#     #message format -->  message =  request+' '+str(key)+' '+str(value)
+#     hostname = socket.gethostname();
+#     IPAddr = socket.gethostbyname(hostname)
+#     #external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
+#
+#     print('yeahhh a request from my hashing table. IP: '+IPAddr)
+#     global hash_table
+#     # split the component of the new message ...
+#     temp = message.split(message)
+#     if(temp[0] == 'put'):
+#         insert(temp[1], temp[2]) # insert(key, value)
+#     elif(temp[0] == 'get'):
+#         search(temp[1]) # search(key)
+#     return True
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
