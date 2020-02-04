@@ -13,14 +13,18 @@ def connect_server( message, server_ip):
     global nack
     #connect the socket to the port where the server is listening to
     # server_address = ('localhost', 10000)
-    server_address = (server_ip, 10000)
-    print('client is now connecting to the port {server}' .format(server = server_address))
+    #server_address = (server_ip, 10000)
+    #print('client is now connecting to the port {server}' .format(server = server_address))
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     #sock.connect(server_address)
     ## to be removed ##
-    sock.connect('128.180.220.113')
-    sock2.connect('128.180.204.171')
+    server_address= (server_ip, 1000)
+    sock.connect(server_address)
+    print('client is now connecting to the port {server}' .format(server = server_address))
+    # server_address = ('128.180.204.171', 1000)
+    # sock2.connect(server_address)
+    # print('client is now connecting to the port {server}' .format(server = server_address))
     ## to be removed ##
     try:
         # random model to ask put and get request from the server.. the client can know whether the server has it locally or not ... it can tell the server client 3 has it
