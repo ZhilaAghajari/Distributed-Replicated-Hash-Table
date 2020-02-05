@@ -89,7 +89,7 @@ for i in range(number_operations):
             t = 1 #
             while(connect_server(message, server_ip, sock['s1']) =='Nack'):
                 time.sleep(0.000001*t)
-                t = t*2
+                #t = t*2
     elif node_id ==1:
         #corresponding_sock = socket['s2']
         server_ip = server_ip_mac_book
@@ -98,7 +98,7 @@ for i in range(number_operations):
             t = 1 #
             while(connect_server(message, server_ip, sock['s2']) =='Nack'):
                 time.sleep(0.000001*t)
-                t = t*2
+                #t = t*2
 
     # server_ips = [server_ip_mac_mini, server_ip_mac ]
     # server_ip = server_ips[randint(0,1)]
@@ -114,7 +114,7 @@ for i in range(number_operations):
     #         t = t*2
 
 
-
+sock.close()
 end_time = time.time()
 time_period = end_time -start_time
 print('percent of success:'+str(num_success/number_operations))
