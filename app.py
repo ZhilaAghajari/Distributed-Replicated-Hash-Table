@@ -20,7 +20,14 @@ def connect_server( message, server_ip,sock):
         # Send data
         #message = 'MessageFromApplication.'+' ' +  message
         print('Sending the data from application """ {data}'.format(data=message))
-        sock.sendall(message.encode())
+        try:
+            sock.sendall(message.encode())
+        except:
+            sock =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect(server_address)
+            print('this is reconnection because of a broken pipeline')
+            sock.sendall(message.encode())
+            print('data has been sent after reconnection')
         # here we receive message back from the server which tells us whether the operation was done successfully or not then we calculate the performance
         #amount_expected = len(message) # I will get true or false and then count the number of true as successful and False as unsuccessful
         data = sock.recv(1024).decode('utf-8')
@@ -43,13 +50,14 @@ def connect_server( message, server_ip,sock):
     finally:
         0
         #print('closing socket in client side')
+        print('')
         #sock.close()
     return # end of function connect_server
 
 # the main function goes here ...
 # Initialize the variables ..
 # Update this part by reading this information from the property file
-number_operations = 100 # do them in a for loop after doing for one operation
+number_operations = 300 # do them in a for loop after doing for one operation
 num_success=0
 num_unsuccessfull=0
 nack = 0
@@ -61,8 +69,8 @@ server_ip_mac_book = '128.180.204.171'
 sock = {}
 sock['s1'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock['s2'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock['s1'] .connect((server_ip_mac_mini,10000))
-sock['s2'] .connect((server_ip_mac_book,10000))
+sock['s1'].connect((server_ip_mac_mini,10000))
+sock['s2'].connect((server_ip_mac_book,10000))
 for i in range(number_operations):
     number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
     thread_numbers = 2 # change it to 3 after testing ..
@@ -99,13 +107,13 @@ for i in range(number_operations):
             while(connect_server(message, server_ip, sock['s2']) =='Nack'):
                 time.sleep(0.000001*t)
                 #t = t*2
-
+    print('iteration: '+str(i))
+    print(server_ip)
     # server_ips = [server_ip_mac_mini, server_ip_mac ]
     # server_ip = server_ips[randint(0,1)]
     #server_ip = '128.180.204.171'
     # server_ip = 'localhost'
-    print('iteration: '+str(i))
-    print(server_ip)
+
     # res_itr = connect_server(message, server_ip,corresponding_sock)
     # if res_itr == 'Nack':
     #     t = 1 #
@@ -114,7 +122,7 @@ for i in range(number_operations):
     #         t = t*2
 
 
-sock.close()
+#sock.close()
 end_time = time.time()
 time_period = end_time -start_time
 print('percent of success:'+str(num_success/number_operations))
