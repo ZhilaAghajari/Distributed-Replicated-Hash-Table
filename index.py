@@ -3,10 +3,12 @@ import socket
 import sys
 import threading
 
-# initializing hash-table to serve the request send to this current node ..
+# Create the hash-table of this server ..
 number_keys = 5000
 thread_numbers = 3
 hash_table = [[] for i in range(int(number_keys/thread_numbers))]
+
+#Initialize hash-table ( by the rate of 25% , 50%, 90% of its whole size .. )
 
 locks = [threading.Lock() for _ in range(len(hash_table))]
 # serve the recieved requests in this node:

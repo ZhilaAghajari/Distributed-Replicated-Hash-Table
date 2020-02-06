@@ -63,8 +63,10 @@ num_unsuccessfull=0
 nack = 0
 start_time = time.time()
 #ips ...
-server_ip_mac_mini = '128.180.220.113'
-server_ip_mac_book = '128.180.204.171'
+#server_ip_mac_mini = '128.180.220.113' #university
+server_ip_mac_mini = '4.121.117.230' #at home
+#server_ip_mac_book = '128.180.204.171'
+server_ip_mac_book = '64.121.117.230'
 # sockets ..
 sock = {}
 sock['s1'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -84,7 +86,7 @@ for i in range(number_operations):
         message =  request+' '+str(key)+' '+str(value)
     else:
         request = 'get'
-        message =  request+' '+str(key)
+        message =  request+' '+strç(key)
 
     #calculate which node should serve this request :
     node_id = key%thread_numbers
@@ -121,8 +123,6 @@ for i in range(number_operations):
     #         time.sleep(0.000001*t)
     #         t = t*2
 
-
-#sock.close()
 end_time = time.time()
 time_period = end_time -start_time
 print('percent of success:'+str(num_success/number_operations))
