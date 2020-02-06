@@ -67,15 +67,18 @@ server_ip_mac_mini = '128.180.220.113' #university
 #server_ip_mac_mini = '192.168.1.8' #at home
 server_ip_mac_book = '128.180.204.171'
 #server_ip_mac_book = '192.168.1.5'
+server_ip_sunlab = '128.180.120.77'
 # sockets ..
 sock = {}
 sock['s1'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock['s2'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock['s3'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock['s1'].connect((server_ip_mac_mini,10000))
 sock['s2'].connect((server_ip_mac_book,10000))
+sock['s3'].connect((server_ip_mac_book,10000))
 for i in range(number_operations):
     number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
-    node_numbers = 2 # change it to 3 after testing ..
+    node_numbers = 3 # change it to 3 after testing ..
     value = randint(1,999999)
     key = randint(1,number_keys)
     # create the hash table of the current node, based on the starting key it reads from the property file ..
@@ -109,6 +112,15 @@ for i in range(number_operations):
             while(connect_server(message, server_ip, sock['s2']) =='Nack'):
                 time.sleep(0.000001*t)
                 #t = t*2
+    elif node_id ==2:
+        server_ip = server_ip_sunlab
+        res_itr = connect_server(message, server_ip, sock['s3'])
+        if res_itr == 'Nack':
+            t = 1 #
+            while(connect_server(message, server_ip, sock['s3']) =='Nack'):
+                time.sleep(0.000001*t)
+                #t = t*2
+
     print('iteration: '+str(i))
     print(server_ip)
 
