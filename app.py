@@ -63,10 +63,10 @@ num_unsuccessfull=0
 nack = 0
 start_time = time.time()
 #ips ...
-#server_ip_mac_mini = '128.180.220.113' #university
-server_ip_mac_mini = '192.168.1.8' #at home
-#server_ip_mac_book = '128.180.204.171'
-server_ip_mac_book = '192.168.1.5'
+server_ip_mac_mini = '128.180.220.113' #university
+#server_ip_mac_mini = '192.168.1.8' #at home
+server_ip_mac_book = '128.180.204.171' #university
+#server_ip_mac_book = '192.168.1.5'
 # sockets ..
 sock = {}
 sock['s1'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
