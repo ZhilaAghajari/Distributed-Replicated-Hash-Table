@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,11 +42,11 @@
       <screen x="-2560" y="23" width="2560" height="1340" />
     </state>
     <state x="-1771" y="332" key="SettingsEditor/-2560.23.2560.1340/0.23.2048.1057@-2560.23.2560.1340" timestamp="1580408260501" />
-    <state x="100" y="123" width="1720" height="789" key="dock-window-1" timestamp="1580953864875">
+    <state x="100" y="123" width="1720" height="789" key="dock-window-1" timestamp="1580957909997">
       <screen x="0" y="23" width="1920" height="989" />
     </state>
     <state x="-2538" y="23" width="2521" height="1376" maximized="true" key="dock-window-1/-2560.23.2560.1417/0.23.2048.994@0.23.2048.994" timestamp="1580850355346" />
-    <state x="100" y="123" width="1720" height="789" key="dock-window-1/0.23.1920.989@0.23.1920.989" timestamp="1580953864875" />
+    <state x="100" y="123" width="1720" height="789" key="dock-window-1/0.23.1920.989@0.23.1920.989" timestamp="1580957909997" />
     <state x="-1615" y="326" key="run.anything.popup" timestamp="1580393773671">
       <screen x="-2560" y="23" width="2560" height="1340" />
     </state>
