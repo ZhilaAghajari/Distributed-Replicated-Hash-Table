@@ -6,6 +6,7 @@ import math
 import random
 from random import randint
 import urllib.request
+import ssl
 # Create the hash-table of this server ..
 number_keys = 5000
 node_numbers = 3
@@ -64,7 +65,10 @@ server_ip_mac_mini = '128.180.220.113' #university
 #server_ip_mac_mini = '192.168.1.8' #at home
 server_ip_mac_book = '128.180.204.171'#university
 #server_ip_mac_book = '192.168.1.5'
-my_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
+context = ssl._create_unverified_context()
+#my_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
+my_ip = urllib.request.urlopen('https://ident.me',context=context).read().decode('utf8')#get my public id
+
 print('my ip')
 print(my_ip)
 #my_ip = '192.168.1.8' #home
