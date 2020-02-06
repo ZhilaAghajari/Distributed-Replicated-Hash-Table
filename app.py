@@ -65,7 +65,7 @@ start_time = time.time()
 #ips ...
 server_ip_mac_mini = '128.180.220.113' #university
 #server_ip_mac_mini = '192.168.1.8' #at home
-server_ip_mac_book = '128.180.204.171' #university
+server_ip_mac_book = '128.180.204.171'
 #server_ip_mac_book = '192.168.1.5'
 # sockets ..
 sock = {}
@@ -92,32 +92,32 @@ for i in range(number_operations):
     node_id = key%node_numbers
     message = message+' '+str(node_id)
     if node_id ==0:
-        corresponding_sock = socket['s1']
+        #corresponding_sock = socket['s1']
         server_ip = server_ip_mac_mini
         res_itr = connect_server(message, server_ip,sock['s1'])
-        # if res_itr == 'Nack':
-        #     t = 1 #
-        #     while(connect_server(message, server_ip, sock['s1']) =='Nack'):
-        #         time.sleep(0.000001*t)
-        #         #t = t*2
+        if res_itr == 'Nack':
+            t = 1 #
+            while(connect_server(message, server_ip, sock['s1']) =='Nack'):
+                time.sleep(0.000001*t)
+                #t = t*2
     elif node_id ==1:
-        corresponding_sock = socket['s2']
+        #corresponding_sock = socket['s2']
         server_ip = server_ip_mac_book
         res_itr = connect_server(message, server_ip,sock['s2'])
-        # if res_itr == 'Nack':
-        #     t = 1 #
-        #     while(connect_server(message, server_ip, sock['s2']) =='Nack'):
-        #         time.sleep(0.000001*t)
-        #         #t = t*2
+        if res_itr == 'Nack':
+            t = 1 #
+            while(connect_server(message, server_ip, sock['s2']) =='Nack'):
+                time.sleep(0.000001*t)
+                #t = t*2
     print('iteration: '+str(i))
     print(server_ip)
 
-    res_itr = connect_server(message, server_ip,corresponding_sock)
-    if res_itr == 'Nack':
-        t = 1 #
-        while(connect_server(message, server_ip, corresponding_sock) =='Nack'):
-            time.sleep(0.000001*t)
-            t = t*2
+    # res_itr = connect_server(message, server_ip,corresponding_sock)
+    # if res_itr == 'Nack':
+    #     t = 1 #
+    #     while(connect_server(message, server_ip, corresponding_sock) =='Nack'):
+    #         time.sleep(0.000001*t)
+    #         t = t*2
 
 end_time = time.time()
 time_period = end_time -start_time
