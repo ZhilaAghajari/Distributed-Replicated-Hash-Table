@@ -3,6 +3,8 @@ import socket
 import sys
 import threading
 import math
+import random
+
 # Create the hash-table of this server ..
 number_keys = 5000
 node_numbers = 3
