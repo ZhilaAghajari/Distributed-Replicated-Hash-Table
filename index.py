@@ -10,24 +10,6 @@ from random import randint
 number_keys = 5000
 node_numbers = 3
 hash_table = [[] for i in range(int(number_keys/node_numbers))]
-# which node id I have : ...
-#ips ...
-#server_ip_mac_mini = '128.180.220.113' #university
-server_ip_mac_mini = '192.168.1.8' #at home
-#server_ip_mac_book = '128.180.204.171'
-server_ip_mac_book = '192.168.1.5'
-#my_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
-my_ip = '192.168.1.8'
-if my_ip == server_ip_mac_mini:
-    node_id = 0
-elif my_ip == server_ip_mac_book:
-    node_id = 1
-#Initialize hash-table ( by the rate of 25% , 50%, 90% of its whole size .. )
-start_key = node_id*(int(number_keys/node_numbers))
-for i in range(math.floor(.25*(number_keys/node_numbers))):
-    value = randint(1,999999)
-    key = randint(start_key,start_key+floor(number_keys/node_numbers))
-    res_init = insert(key,value)
 
 locks = [threading.Lock() for _ in range(len(hash_table))]
 # serve the recieved requests in this node:
@@ -91,6 +73,24 @@ def get(key):
 #         search(temp[1]) # search(key)
 #     return True
 
+# which node id I have : ...
+#ips ...
+#server_ip_mac_mini = '128.180.220.113' #university
+server_ip_mac_mini = '192.168.1.8' #at home
+#server_ip_mac_book = '128.180.204.171'
+server_ip_mac_book = '192.168.1.5'
+#my_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
+my_ip = '192.168.1.8'
+if my_ip == server_ip_mac_mini:
+    node_id = 0
+elif my_ip == server_ip_mac_book:
+    node_id = 1
+#Initialize hash-table ( by the rate of 25% , 50%, 90% of its whole size .. )
+start_key = node_id*(int(number_keys/node_numbers))
+for i in range(math.floor(.25*(number_keys/node_numbers))):
+    value = randint(1,999999)
+    key = randint(start_key,start_key+math.floor(number_keys/node_numbers))
+    res_init = insert(key,value)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 IPAddr = socket.gethostbyname(socket.gethostname())
