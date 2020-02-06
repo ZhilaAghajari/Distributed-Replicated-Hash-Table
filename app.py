@@ -75,7 +75,7 @@ sock['s1'].connect((server_ip_mac_mini,10000))
 sock['s2'].connect((server_ip_mac_book,10000))
 for i in range(number_operations):
     number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
-    thread_numbers = 2 # change it to 3 after testing ..
+    node_numbers = 2 # change it to 3 after testing ..
     value = randint(1,999999)
     key = randint(1,number_keys)
     # create the hash table of the current node, based on the starting key it reads from the property file ..
@@ -86,10 +86,10 @@ for i in range(number_operations):
         message =  request+' '+str(key)+' '+str(value)
     else:
         request = 'get'
-        message =  request+' '+strç(key)
+        message =  request+' '+str(key)
 
     #calculate which node should serve this request :
-    node_id = key%thread_numbers
+    node_id = key%node_numbers
     message = message+' '+str(node_id)
     if node_id ==0:
         #corresponding_sock = socket['s1']
