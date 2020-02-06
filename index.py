@@ -57,21 +57,6 @@ def get(key):
 
 
 # remember to count number of success and fails ..
-# def local_hashing(message):
-#     #message format -->  message =  request+' '+str(key)+' '+str(value)
-#     hostname = socket.gethostname();
-#     IPAddr = socket.gethostbyname(hostname)
-#     #external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
-#
-#     print('yeahhh a request from my hashing table. IP: '+IPAddr)
-#     global hash_table
-#     # split the component of the new message ...
-#     temp = message.split(message)
-#     if(temp[0] == 'put'):
-#         insert(temp[1], temp[2]) # insert(key, value)
-#     elif(temp[0] == 'get'):
-#         search(temp[1]) # search(key)
-#     return True
 
 # which node id I have : ...
 #ips ...
@@ -87,7 +72,7 @@ elif my_ip == server_ip_mac_book:
     node_id = 1
 #Initialize hash-table ( by the rate of 25% , 50%, 90% of its whole size .. )
 start_key = node_id*(int(number_keys/node_numbers))
-for i in range(math.floor(.25*(number_keys/node_numbers))):
+for i in range(math.floor(.90*(number_keys/node_numbers))):
     value = randint(1,999999)
     key = randint(start_key,start_key+math.floor(number_keys/node_numbers))
     res_init = insert(key,value)
@@ -99,7 +84,6 @@ print('starting on {server_address} on port {port}' .format(server_address = sys
 sock.bind(server_address)
 
 sock.listen(1) #put the socket in server mode
-
 while True:
 
     print('waiting for a connection')
