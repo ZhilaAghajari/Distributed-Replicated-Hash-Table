@@ -51,6 +51,7 @@ def get(key):
         k, v = kv
         if key==k:
             #return True
+            locks[hash_key].release()
             return v
     print('this key has not been set in my machine')
     locks[hash_key].release()
