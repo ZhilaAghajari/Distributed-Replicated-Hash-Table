@@ -91,7 +91,7 @@ elif my_ip == server_ip_sunlab_caliban:
 
 #Initialize hash-table ( by the rate of 25% , 50%, 90% of its whole size .. )
 start_key = node_id*(int(number_keys/node_numbers))
-for i in range(math.floor(.90*(number_keys/node_numbers))):
+for i in range(math.floor(.20*(number_keys/node_numbers))):
     value = randint(1,999999)
     key = randint(start_key,start_key+math.floor(number_keys/node_numbers))
     res_init = insert(key,value)

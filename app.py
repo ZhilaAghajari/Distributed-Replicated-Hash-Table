@@ -139,7 +139,7 @@ for i in range(number_operations):
 end_time = time.time()
 time_period = end_time -start_time
 print('percent of return true (put the new key-value pair):'+str(num_success/number_operations))
-print('percent of return False (a value is associated with the key):'+str(num_fale/number_operations))
+print('percent of return False (a value is associated with the key):'+str(num_false/number_operations))
 print('percent of Un-success (return null in get):'+str(num_unsuccessfull/number_operations))
 
 print('percent of un-acknowledged requests: '+str(nack/number_operations))
