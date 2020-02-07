@@ -11,6 +11,7 @@ def connect_server( message, server_ip,sock):
     global num_success
     global num_unsuccessfull
     global nack
+    global num_false
     #connect the socket to the port where the server is listening to
     server_address = (server_ip, 10000)
     #sock.connect(server_address)
@@ -32,19 +33,17 @@ def connect_server( message, server_ip,sock):
         #amount_expected = len(message) # I will get true or false and then count the number of true as successful and False as unsuccessful
         data = sock.recv(1024).decode('utf-8')
         print('Receiving the result from server ::: {data} '.format(data=data))
-        # if data == 'True':
-        #     num_success = num_success+1
+        if data == 'True':
+            num_success = num_success+1
         if data == 'Nack':
             nack = nack + 1
             return 'Nack'
         if data == "None":
             num_unsuccessfull = num_unsuccessfull +1
             #print('The process was not done')
-        else :
-            num_success = num_success +1
-            print(data)
-        # if data== 'False':
-        #     num_unsuccessfull = num_unsuccessfull +1
+
+        if data== 'False':
+            num_false = num_false +1
 
 
     finally:
@@ -60,6 +59,7 @@ def connect_server( message, server_ip,sock):
 number_operations = 10000 # do them in a for loop after doing for one operation
 num_success=0
 num_unsuccessfull=0
+num_false =0
 nack = 0
 start_time = time.time()
 #ips ...
@@ -138,9 +138,12 @@ for i in range(number_operations):
 
 end_time = time.time()
 time_period = end_time -start_time
-print('percent of success:'+str(num_success/number_operations))
-print('percent of Unsuccess:'+str(num_unsuccessfull/number_operations))
+print('percent of return true (put the new key-value pair):'+str(num_success/number_operations))
+print('percent of return False (a value is associated with the key):'+str(num_fale/number_operations))
+print('percent of Un-success (return null in get):'+str(num_unsuccessfull/number_operations))
+
 print('percent of un-acknowledged requests: '+str(nack/number_operations))
+
 print('{opr} number of operations has been executed in {sec} seconds'.format(sec=time_period, opr=(number_operations)))
 print('throughput is: {thro}'.format(thro=(number_operations/time_period)))
 
