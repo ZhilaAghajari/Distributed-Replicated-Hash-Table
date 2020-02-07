@@ -52,7 +52,7 @@ def get(key):
         if key==k:
             #return True
             return v
-    print('this key has not yet set in my machine')
+    print('this key has not been set in my machine')
     locks[hash_key].release()
     return None # if the key is not there ? I don't think we need it, right?
 

@@ -64,11 +64,11 @@ nack = 0
 start_time = time.time()
 #ips ...
 #remove
-server_ip_mac_mini = '128.180.220.113' #university
-#server_ip_mac_mini = '192.168.1.8' #at home
-server_ip_mac_book = '128.180.204.171'
-#server_ip_mac_book = '192.168.1.5'
-server_ip_sunlab = '128.180.120.73'
+# server_ip_mac_mini = '128.180.220.113' #university
+# #server_ip_mac_mini = '192.168.1.8' #at home
+# server_ip_mac_book = '128.180.204.171'
+# #server_ip_mac_book = '192.168.1.5'
+# server_ip_sunlab = '128.180.120.73'
 
 #sunlab machines
 server_ip_sunlab_eris = '128.180.120.73'
@@ -135,13 +135,6 @@ for i in range(number_operations):
 
     print('iteration: '+str(i))
     print(server_ip)
-
-    # res_itr = connect_server(message, server_ip,corresponding_sock)
-    # if res_itr == 'Nack':
-    #     t = 1 #
-    #     while(connect_server(message, server_ip, corresponding_sock) =='Nack'):
-    #         time.sleep(0.000001*t)
-    #         t = t*2
 
 end_time = time.time()
 time_period = end_time -start_time
