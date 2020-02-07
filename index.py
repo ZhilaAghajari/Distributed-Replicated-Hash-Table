@@ -8,7 +8,7 @@ from random import randint
 import urllib.request
 import ssl
 # Create the hash-table of this server ..
-number_keys = 5000
+number_keys = 300
 node_numbers = 3
 hash_table = [[] for i in range(int(number_keys/node_numbers))]
 

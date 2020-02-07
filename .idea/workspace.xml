@@ -52,9 +52,10 @@
       <screen x="-2560" y="23" width="2560" height="1340" />
     </state>
     <state x="-1771" y="332" key="SettingsEditor/-2560.23.2560.1340/0.23.2048.1057@-2560.23.2560.1340" timestamp="1580408260501" />
-    <state x="-1921" y="23" width="1921" height="723" key="dock-window-1" timestamp="1581085039562">
-      <screen x="-2560" y="23" width="2560" height="1417" />
+    <state x="-2540" y="23" width="2525" height="1393" maximized="true" key="dock-window-1" timestamp="1581089301946">
+      <screen x="-2560" y="23" width="2560" height="1340" />
     </state>
+    <state x="-2540" y="23" width="2525" height="1393" maximized="true" key="dock-window-1/-2560.23.2560.1340/0.23.2048.1057@0.23.2048.1057" timestamp="1581089301946" />
     <state x="-1921" y="23" width="1921" height="723" key="dock-window-1/-2560.23.2560.1417/0.23.2048.980@0.23.2048.980" timestamp="1581085039562" />
     <state x="-2538" y="23" width="2521" height="1376" maximized="true" key="dock-window-1/-2560.23.2560.1417/0.23.2048.994@0.23.2048.994" timestamp="1580850355346" />
     <state x="100" y="123" width="1720" height="789" key="dock-window-1/0.23.1920.989@0.23.1920.989" timestamp="1580957909997" />
@@ -80,6 +81,11 @@
           <url>file://$PROJECT_DIR$/index.py</url>
           <line>81</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/index.py</url>
+          <line>116</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

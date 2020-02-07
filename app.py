@@ -57,7 +57,7 @@ def connect_server( message, server_ip,sock):
 # the main function goes here ...
 # Initialize the variables ..
 # Update this part by reading this information from the property file
-number_operations = 300 # do them in a for loop after doing for one operation
+number_operations = 10000 # do them in a for loop after doing for one operation
 num_success=0
 num_unsuccessfull=0
 nack = 0
@@ -86,7 +86,7 @@ sock['s1'].connect((server_ip_sunlab_eris,10000))
 sock['s2'].connect((server_ip_sunlab_ariel,10000))
 sock['s3'].connect((server_ip_sunlab_caliban,10000))
 for i in range(number_operations):
-    number_keys = 5000 # these keys are stored equally between nodes ( to know where they are stored, we can have
+    number_keys = 300 # these keys are stored equally between nodes ( to know where they are stored, we can have
     node_numbers = 3 # change it to 3 after testing ..
     value = randint(1,999999)
     key = randint(1,number_keys)
@@ -149,6 +149,7 @@ print('percent of success:'+str(num_success/number_operations))
 print('percent of Unsuccess:'+str(num_unsuccessfull/number_operations))
 print('percent of un-acknowledged requests: '+str(nack/number_operations))
 print('{opr} number of operations has been executed in {sec} seconds'.format(sec=time_period, opr=(number_operations)))
+print('throughput is: {thro}'.format(thro=(number_operations/time_period)))
 
 
 
