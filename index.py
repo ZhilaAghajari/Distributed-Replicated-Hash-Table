@@ -8,7 +8,7 @@ from random import randint
 import urllib.request
 import ssl
 # Create the hash-table of this server ..
-number_keys = 300
+number_keys = 1000000
 node_numbers = 3
 hash_table = [[] for i in range(int(number_keys/node_numbers))]
 
@@ -91,7 +91,7 @@ elif my_ip == server_ip_sunlab_caliban:
 
 #Initialize hash-table ( by the rate of 25% , 50%, 90% of its whole size .. )
 start_key = node_id*(int(number_keys/node_numbers))
-for i in range(math.floor(.20*(number_keys/node_numbers))):
+for i in range(math.floor(.50*(number_keys/node_numbers))):
     value = randint(1,999999)
     key = randint(start_key,start_key+math.floor(number_keys/node_numbers))
     res_init = insert(key,value)

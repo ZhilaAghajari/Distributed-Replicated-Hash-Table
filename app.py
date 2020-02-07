@@ -56,7 +56,7 @@ def connect_server( message, server_ip,sock):
 # the main function goes here ...
 # Initialize the variables ..
 # Update this part by reading this information from the property file
-number_operations = 10000 # do them in a for loop after doing for one operation
+number_operations = 1000 # do them in a for loop after doing for one operation
 num_success=0
 num_unsuccessfull=0
 num_false =0
@@ -86,7 +86,7 @@ sock['s1'].connect((server_ip_sunlab_eris,10000))
 sock['s2'].connect((server_ip_sunlab_ariel,10000))
 sock['s3'].connect((server_ip_sunlab_caliban,10000))
 for i in range(number_operations):
-    number_keys = 300 # these keys are stored equally between nodes ( to know where they are stored, we can have
+    number_keys = 1000000 # these keys are stored equally between nodes ( to know where they are stored, we can have
     node_numbers = 3 # change it to 3 after testing ..
     value = randint(1,999999)
     key = randint(1,number_keys)
@@ -139,9 +139,11 @@ for i in range(number_operations):
 end_time = time.time()
 time_period = end_time -start_time
 print('percent of return true (put the new key-value pair):'+str(num_success/number_operations))
+print('number of true :'+str(num_success))
 print('percent of return False (a value is associated with the key):'+str(num_false/number_operations))
+print('number of false:'+str(num_false))
 print('percent of Un-success (return null in get):'+str(num_unsuccessfull/number_operations))
-
+print('number of null:'+str(num_unsuccessfull))
 print('percent of un-acknowledged requests: '+str(nack/number_operations))
 
 print('{opr} number of operations has been executed in {sec} seconds'.format(sec=time_period, opr=(number_operations)))
