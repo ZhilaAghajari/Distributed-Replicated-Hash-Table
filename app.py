@@ -74,13 +74,6 @@ server_ip_sunlab = '128.180.120.73'
 server_ip_sunlab_eris = '128.180.120.73'
 server_ip_sunlab_ariel = '128.180.120.65'
 server_ip_sunlab_caliban ='128.180.120.66'
-
-if my_ip == server_ip_sunlab_eris:
-    node_id = 0
-elif my_ip == server_ip_sunlab_ariel:
-    node_id = 1
-elif my_ip == server_ip_sunlab_caliban:
-    node_id = 2
 # sockets ..
 sock = {}
 sock['s1'] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
