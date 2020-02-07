@@ -121,10 +121,10 @@ while True:
         #send the data back to the application who requested this request?
         print('sending result of the request back to the client side')
         print('@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-        if res==None:
-            res = "None"
-        else:
-            res = "Success"
+        # if res==None:
+        #     res = "None"
+        # else:
+        #     res = "Success"
         connection.sendall(str(res).encode())
         print(res)
     finally:
