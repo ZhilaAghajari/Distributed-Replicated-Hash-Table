@@ -65,7 +65,9 @@ server_ip_mac_mini = '128.180.220.113' #university
 #server_ip_mac_mini = '192.168.1.8' #at home
 server_ip_mac_book = '128.180.204.171'#university
 #server_ip_mac_book = '192.168.1.5'
-server_ip_sunlab = '128.180.120.73' #sunlab
+server_ip_sunlab_eris= '128.180.120.73' #sunlab
+server_ip_sunlab_ariel = '128.180.120.65'
+server_ip_sunlab_caliban ='128.180.120.66'
 context = ssl._create_unverified_context()
 #my_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')#get my public id
 my_ip = urllib.request.urlopen('https://ident.me',context=context).read().decode('utf8')#get my public id
@@ -73,11 +75,17 @@ my_ip = urllib.request.urlopen('https://ident.me',context=context).read().decode
 print('my ip')
 print(my_ip)
 #my_ip = '192.168.1.8' #home
-if my_ip == server_ip_mac_mini:
+# if my_ip == server_ip_mac_mini:
+#     node_id = 0
+# elif my_ip == server_ip_mac_book:
+#     node_id = 1
+# elif my_ip == server_ip_sunlab:
+#     node_id = 2
+if my_ip == server_ip_sunlab_eris:
     node_id = 0
-elif my_ip == server_ip_mac_book:
+elif my_ip == server_ip_sunlab_ariel:
     node_id = 1
-elif my_ip == server_ip_sunlab:
+elif my_ip == server_ip_sunlab_caliban:
     node_id = 2
 
 #Initialize hash-table ( by the rate of 25% , 50%, 90% of its whole size .. )
